@@ -52,11 +52,11 @@ public class Tools {
     public int nbSlices = 1;
     
     // Protein A segmentation
-    public String protAThMethod = "Otsu";
+    public String protAThMethod = "Default";
     public boolean protAStackHistogram = true;
     
     // Protein B segmentation
-    public String protBThMethod = "Otsu";
+    public String protBThMethod = "Default";
     public boolean protBStackHistogram = true;
     
     
