@@ -1,32 +1,32 @@
-# Iba1 
+# Proteins_Segmentation 
 
-* **Developed for:** Julie
+* **Developed for:** Félix
 * **Team:** Rouach
-* **Date:** March 2024
+* **Date:** April 2024
 * **Software:** Fiji
 
 ### Images description
 
-3D images taken with a x40 objective on  a spinning-disk microscope
+3D images
 
-1 channel: Iba1 microglia
+2 channels: 
+  1. Protein A
+  2. Protein B (optional)
 
-With each image can be provided a *.roi* or *.zip* file containing one or multiple ROI(s).
+With each image, a *.roi* or *.zip* file can be provided containing one or multiple ROI(s). Each ROI should be named ..._z... to indicate its z-slice position. Analysis will be performed within it, as well as C slices before and C slices after, with the value of C provided in the dialog box. If no ROI is provided, analysis will be conducted on the entire image.
 
 ### Plugin description
 
-* Detect microglial somas with Cellpose
-* Segment microglial cells with median filtering + thresholding
-* Compute background noise of Iba1 channel
-* Give microglial somas number + microglial cells volume + microglial cells background-corrected mean and integrated intensity
-* If ROI(s) provided, remove from the analysis microglia that are inside
+* Segment protein A channel using median filtering + thresholding + median filtering
+* If available, segment protein B channel using the same approach
+* Compute the background noise in each provided channel
+* Provide protein volume and background-corrected mean intensity in each provided channel
 
 ### Dependencies
 
 * **3DImageSuite** Fiji plugin
 * **CLIJ2** Fiji plugin
-* **Cellpose** conda environment + *cyto2_Iba1_microglia* (homemade) model
 
 ### Version history
 
-Version 1 released on March 26, 2024.
+Version 1 released on April 19, 2024.
