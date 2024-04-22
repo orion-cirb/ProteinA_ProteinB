@@ -13,7 +13,7 @@
   1. Protein A
   2. Protein B (optional)
 
-With each image, a *.roi* or *.zip* file can be provided containing one or multiple ROI(s). Each ROI should be named ..._z... to indicate its z-slice position. Analysis will be performed within it, as well as X slices before and X slices after, with the value of X provided in the dialog box. If no ROI is provided, analysis will be conducted on the entire image.
+With each image, a *.roi* or *.zip* file can be provided containing one or multiple ROI(s). Each ROI should be drawn on the proper z-slice position, as the analysis will be performed within it, as well as X slices before and X slices after, with the value of X provided in the dialog box. If no ROI is provided, analysis will be conducted on the entire image.
 
 ### Plugin description
 
@@ -29,4 +29,4 @@ With each image, a *.roi* or *.zip* file can be provided containing one or multi
 
 ### Version history
 
-Version 1 released on April 19, 2024.
+Version 1 released on April 22, 2024.
