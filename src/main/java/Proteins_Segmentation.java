@@ -97,7 +97,7 @@ public class Proteins_Segmentation implements PlugIn {
             // Write headers results for results files
             FileWriter fwResults = new FileWriter(outDirResults + "results.csv", false);
             BufferedWriter results = new BufferedWriter(fwResults);
-                results.write("Image name\tImage vol (µm3)\tROI name\tROI vol (µm3)\tNb slices\tProtein A bg\tProtein A volume (µm3)\t" +
+                results.write("Image name\tImage vol (µm3)\tROI name\tROI vol (µm3)\tROI slice position\tROI slices nb\tProtein A bg\tProtein A volume (µm3)\t" +
                         "Protein A bg-corr mean int");
             if(!chNames[1].equals("None"))
                 results.write("\tProtein B bg\tProtein B volume (µm3)\tProtein B bg-corr mean int");
@@ -171,7 +171,7 @@ public class Proteins_Segmentation implements PlugIn {
                     }
                     
                     // Write results
-                    results.write(rootName+"\t"+imgVol+"\t"+roi.getName()+"\t"+roiVol+"\t"+roi.getProperty("zNb")+"\t"+bgProtA+"\t"+volProtA+"\t"+meanIntProtA);
+                    results.write(rootName+"\t"+imgVol+"\t"+roi.getName()+"\t"+roiVol+"\t"+roi.getZPosition()+"\t"+roi.getProperty("zNb")+"\t"+bgProtA+"\t"+volProtA+"\t"+meanIntProtA);
                     if(imgProtB != null)
                          results.write("\t"+bgProtB+"\t"+volProtB+"\t"+meanIntProtB);
                     results.write("\n");

@@ -294,9 +294,8 @@ public class Tools {
             List<Roi> roisTemp = Arrays.asList(rm.getRoisAsArray());
             
             for(Roi roi: roisTemp) {
-                String name = roi.getName();
-                if(name.contains("_z")) {
-                    int z = Integer.valueOf(name.split("_")[1].replace("z", "")); // TODO: use roi.getZPosition() instead?
+                if(roi.getZPosition() > 0) {
+                    int z = roi.getZPosition();
                     int zStart = (z - nbSlices < 1)? 1 : z - nbSlices;
                     int zStop = (z + nbSlices > img.getNSlices())? img.getNSlices() : z + nbSlices;
                     int zNb = zStop - zStart + 1;
@@ -305,7 +304,7 @@ public class Tools {
                     roi.setProperty("zNb", String.valueOf(zNb));
                     rois.add(roi);
                 } else {
-                    IJ.showMessage("ERROR", "ROI " + roiName + " not analyzed. It should be named ..._z... indicating z-slice position.");
+                    IJ.showMessage("ERROR", "ROI " + roiName + " will not be analyzed, as it is not associated with a particular slice.");
                 }
             }
         }
@@ -313,6 +312,7 @@ public class Tools {
         if(rois.isEmpty()) {
             Roi roi = new Roi(0, 0, img.getWidth(), img.getHeight());
             roi.setName("entire image");
+            roi.setPosition((int) 0.5*img.getNSlices());
             roi.setProperty("zStart", "1");
             roi.setProperty("zStop", String.valueOf(img.getNSlices()));
             roi.setProperty("zNb", String.valueOf(img.getNSlices()));
