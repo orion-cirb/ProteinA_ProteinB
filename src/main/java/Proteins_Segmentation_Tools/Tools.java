@@ -304,7 +304,7 @@ public class Tools {
                     roi.setProperty("zNb", String.valueOf(zNb));
                     rois.add(roi);
                 } else {
-                    IJ.showMessage("ERROR", "ROI " + roiName + " will not be analyzed, as it is not associated with a particular slice.");
+                    IJ.showMessage("ERROR", "ROI " + roiName + " will not be analyzed, as it is not associated with a proper z-slice.");
                 }
             }
         }
@@ -312,7 +312,7 @@ public class Tools {
         if(rois.isEmpty()) {
             Roi roi = new Roi(0, 0, img.getWidth(), img.getHeight());
             roi.setName("entire image");
-            roi.setPosition((int) 0.5*img.getNSlices());
+            roi.setPosition(0);
             roi.setProperty("zStart", "1");
             roi.setProperty("zStop", String.valueOf(img.getNSlices()));
             roi.setProperty("zNb", String.valueOf(img.getNSlices()));
