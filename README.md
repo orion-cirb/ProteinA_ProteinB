@@ -29,4 +29,4 @@ With each image, a *.roi* or *.zip* file can be provided containing one or multi
 
 ### Version history
 
-Version 1 released on April 22, 2024.
+Version 1 released on April 22, 2024. Corrected on September 13, 2024.
