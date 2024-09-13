@@ -75,19 +75,19 @@ public class Proteins_Segmentation implements PlugIn {
             tools.findImageCalib(meta);
             
             // Find channel names
-            String[] channels = tools.findChannels(imageFiles.get(0), meta, reader);
+            String[] chMeta = tools.findChannels(imageFiles.get(0), meta, reader);
             
-            String[] chNames = tools.dialog(channels);
-            if (chNames == null) {
+            String[] chOrder = tools.dialog(chMeta);
+            if (chOrder == null) {
                 IJ.showMessage("", "Plugin canceled");
                 return;
-            } else if(chNames[0] == "None") {
+            } else if(chOrder[0] == "None") {
                 IJ.showMessage("ERROR", "Protein A channel not defined.");
                 return;
             }
             
             // Create output folder
-            String thMethods = (!chNames[1].equals("None"))? tools.protAThMethod + "_" + tools.protBThMethod : tools.protAThMethod;
+            String thMethods = (!chOrder[1].equals("None"))? tools.protAThMethod + "_" + tools.protBThMethod : tools.protAThMethod;
             String outDirResults = imageDir + File.separator + "Results_" + thMethods + "_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date()) + File.separator;
             File outDir = new File(outDirResults);
             if (!Files.exists(Paths.get(outDirResults))) {
@@ -99,7 +99,7 @@ public class Proteins_Segmentation implements PlugIn {
             BufferedWriter results = new BufferedWriter(fwResults);
                 results.write("Image name\tImage vol (µm3)\tROI name\tROI vol (µm3)\tROI slice position\tROI slices nb\tProtein A bg\tProtein A volume (µm3)\t" +
                         "Protein A bg-corr mean int");
-            if(!chNames[1].equals("None"))
+            if(!chOrder[1].equals("None"))
                 results.write("\tProtein B bg\tProtein B volume (µm3)\tProtein B bg-corr mean int");
             results.write("\n");
             results.flush();
@@ -117,14 +117,14 @@ public class Proteins_Segmentation implements PlugIn {
                 
                 // Open Protein A channel
                 tools.print("- Opening Protein A channel -");
-                int index = ArrayUtils.indexOf(channels, channels[0]);
+                int index = ArrayUtils.indexOf(chMeta, chOrder[0]);
                 ImagePlus imgProtA = BF.openImagePlus(options)[index];
                 
                 // Open Protein B channel, if provided
                 ImagePlus imgProtB = null;
-                if (!chNames[1].equals("None")) {
+                if (!chOrder[1].equals("None")) {
                     tools.print("- Opening Protein B channel -");
-                    index = ArrayUtils.indexOf(channels, channels[1]);
+                    index = ArrayUtils.indexOf(chMeta, chOrder[1]);
                     imgProtB = BF.openImagePlus(options)[index];
                 } else
                     System.out.println("WARNING: No Protein B channel provided");

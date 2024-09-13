@@ -44,7 +44,7 @@ public class Tools {
     
     private final CLIJ2 clij2 = CLIJ2.getInstance();
     
-    String[] chNames = {"Protein A: ", "Protein B (optional): "};
+    String[] chDialog = {"Protein A: ", "Protein B (optional): "};
     public Calibration cal = new Calibration();
     public double pixVol;
     
@@ -228,8 +228,8 @@ public class Tools {
         gd.addImage(icon);
         
         gd.addMessage("Channels", new Font("Monospace", Font.BOLD, 12), Color.blue);
-        for (int n = 0; n < chNames.length; n++) {
-            gd.addChoice(chNames[n], channels, channels[n]);
+        for (int n = 0; n < chDialog.length; n++) {
+            gd.addChoice(chDialog[n], channels, channels[n]);
         }
         
         String[] thMethods = AutoThresholder.getMethods();
@@ -250,9 +250,9 @@ public class Tools {
         gd.addHelp(helpUrl);
         gd.showDialog();
         
-        String[] chChoices = new String[chNames.length];
-        for (int n = 0; n < chChoices.length; n++) 
-            chChoices[n] = gd.getNextChoice();
+        String[] chOrder = new String[chDialog.length];
+        for (int n = 0; n < chOrder.length; n++) 
+            chOrder[n] = gd.getNextChoice();
         
         nbSlices = (int) gd.getNextNumber();
         
@@ -267,8 +267,8 @@ public class Tools {
         pixVol = cal.pixelHeight*cal.pixelWidth*cal.pixelDepth;
         
         if (gd.wasCanceled())
-            return(null);
-        return(chChoices);
+            chOrder = null;  
+        return(chOrder);
     }
     
     
