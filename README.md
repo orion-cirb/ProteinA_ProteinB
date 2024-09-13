@@ -10,7 +10,7 @@
 3D images
 
 2 channels: 
-  1. Protein A
+  1. Protein A (mandatory)
   2. Protein B (optional)
 
 With each image, a *.roi* or *.zip* file can be provided containing one or multiple ROI(s). Each ROI should be drawn on the proper z-slice position, as the analysis will be performed within it, as well as X slices before and X slices after, with the value of X provided in the dialog box. If no ROI is provided, analysis will be conducted on the entire image.
